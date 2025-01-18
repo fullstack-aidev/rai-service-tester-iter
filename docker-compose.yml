@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  rai_service_tester:
+    build: .
+    container_name: rai_service_tester_container
+    volumes:
+      - .:/usr/src/rai-service-tester-volume
+      - ./config.yml:/usr/src/rai-service-tester/config.yml
+    working_dir: /usr/src/rai-service-tester-wd
+    command: ["cargo", "run", "--release"]
+    environment:
+      - RUST_LOG=info
+    deploy:
+      replicas: 3

@@ -1,0 +1,35 @@
+load_test_mode:
+  enable: true
+  total_request_per_secs: 3000
+  duration_between_request: "auto"
+log_level: "info" # "info" or "debug"
+api_gateway:
+  host: 192.168.1.24:7878
+  key: 1234567890
+  secret: 1234567890
+  stage: "dev" #  "dev", "sit", "demo-prod" or "prod"
+  protocol: "RSocket"
+inference:
+  mode: "chat_completion"
+  payload:
+    load_test:
+      file: "request_payload/loadtest-request.json"
+    functionality:
+      file: "request_payload/functionality-request.json"
+  output:
+    mode: "stream"
+    load_test_output_folder: "response_payload/loadtest-response"
+    functionality_test_output_folder: "response_payload/functionality-response"
+  endpoint:
+    openai:
+      service_mode:
+        private_token: "f2136021313172f021e2d07282324363f3d511a1c0a163d054524345709215c3336440c0"
+        name: "eid_openai_rtk_00001"
+        model: "gpt-4o-mini"
+        simulator:
+          enable: true
+          endpoint: "auto"
+      custom_account:
+        enable: false
+        api_key: "6201030362933552b11003939032d2a390b4e271f2136021313172f021e2d07282324363f3d511a1c0a163d054524345709215c3336440c061b090b371d125704335a05141"
+        model: "gpt-4o"
