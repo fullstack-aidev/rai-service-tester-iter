@@ -7,9 +7,14 @@ services:
     volumes:
       - .:/usr/src/rai-service-tester-volume
       - ./config.yml:/usr/src/rai-service-tester/config.yml
+      - ./ready:/usr/src/rai-service-tester/ready
     working_dir: /usr/src/rai-service-tester-wd
-    command: ["cargo", "run", "--release"]
+    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
     environment:
       - RUST_LOG=info
+    ports:
+      - "7121:7120"
+      - "7122:7120"
+      - "7123:7120"
     deploy:
       replicas: 3

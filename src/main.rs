@@ -1,11 +1,21 @@
+use std::fs::File;
 use std::process::{Command, exit};
 use std::thread;
 use std::time::Duration;
 use reqwest::blocking::Client;
+use serde::Deserialize;
+use serde_yaml;
+
+#[derive(Deserialize)]
+struct Config {
+    loop_count: usize,
+}
 
 pub fn main() {
+    let config_file = File::open("config_iter.yml").expect("Failed to open config_iter.yml");
+    let config: Config = serde_yaml::from_reader(config_file).expect("Failed to parse config_iter.yml");
+
     let service_name = "rai_service_tester";
-    let loop_count = 2;
     let client = Client::new();
     let replica_addresses = vec![
         "http://localhost:7121/start",
@@ -13,7 +23,7 @@ pub fn main() {
         "http://localhost:7123/start",
     ];
 
-    for _ in 0..loop_count {
+    for _ in 0..config.loop_count {
         let status = Command::new("docker-compose")
             .args(&["up", "-d", &service_name])
             .status()
