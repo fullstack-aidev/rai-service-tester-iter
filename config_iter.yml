@@ -1,1 +1,8 @@
+# config_iter.yml
 loop_count: 2
+delay between_iteration_in_ms: 100
+rai_service_tester:
+  replica_address:
+    - "http://localhost:7121"
+    - "http://localhost:7122"
+    - "http://localhost:7123"

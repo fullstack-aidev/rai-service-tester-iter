@@ -6,6 +6,13 @@ use serde_yaml;
 #[derive(Deserialize)]
 pub struct Config {
     pub loop_count: usize,
+    pub delay_between_iteration_in_ms: u64,
+    pub rai_service_tester: RaiServiceTester,
+}
+
+#[derive(Deserialize)]
+pub struct RaiServiceTester {
+    pub replica_address: Vec<String>,
 }
 
 pub fn load_config(file_path: &str) -> Config {
