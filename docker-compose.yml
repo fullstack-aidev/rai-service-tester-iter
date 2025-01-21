@@ -9,7 +9,7 @@ services:
       - ./ready:/usr/src/rai-service-tester/ready
       - ./response_payload_1:/usr/src/rai-service-tester/response_payload
     working_dir: /usr/src/rai-service-tester
-    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
+    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_1
       - RUST_LOG=info
@@ -28,7 +28,7 @@ services:
       - ./ready:/usr/src/rai-service-tester/ready
       - ./response_payload_2:/usr/src/rai-service-tester/response_payload
     working_dir: /usr/src/rai-service-tester
-    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
+    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_2
       - RUST_LOG=info
@@ -47,7 +47,7 @@ services:
       - ./ready:/usr/src/rai-service-tester/ready
       - ./response_payload_3:/usr/src/rai-service-tester/response_payload
     working_dir: /usr/src/rai-service-tester
-    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
+    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_3
       - RUST_LOG=info
@@ -66,7 +66,7 @@ services:
       - ./ready:/usr/src/rai-service-tester/ready
       - ./response_payload_4:/usr/src/rai-service-tester/response_payload
     working_dir: /usr/src/rai-service-tester
-    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
+    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_4
       - RUST_LOG=info
@@ -85,7 +85,7 @@ services:
       - ./ready:/usr/src/rai-service-tester/ready
       - ./response_payload_5:/usr/src/rai-service-tester/response_payload
     working_dir: /usr/src/rai-service-tester
-    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
+    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_5
       - RUST_LOG=info
