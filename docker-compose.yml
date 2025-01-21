@@ -1,20 +1,111 @@
 version: '3.8'
 
 services:
-  rai_service_tester:
-    build: .
-    container_name: rai_service_tester_container
+  rai_service_tester_1:
+    image: rai-service-tester:latest
     volumes:
       - .:/usr/src/rai-service-tester-volume
       - ./config.yml:/usr/src/rai-service-tester/config.yml
       - ./ready:/usr/src/rai-service-tester/ready
-    working_dir: /usr/src/rai-service-tester-wd
+      - ./response_payload_1:/usr/src/rai-service-tester/response_payload
+    working_dir: /usr/src/rai-service-tester
     command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
     environment:
+      - SERVICE_NAME=rai_service_tester_1
       - RUST_LOG=info
+      - PORT=7121
     ports:
-      - "7121:7120"
-      - "7122:7120"
-      - "7123:7120"
-    deploy:
-      replicas: 3
+      - "7121:7121"
+    depends_on:
+      - graphite
+      - grafana
+
+  rai_service_tester_2:
+    image: rai-service-tester:latest
+    volumes:
+      - .:/usr/src/rai-service-tester-volume
+      - ./config.yml:/usr/src/rai-service-tester/config.yml
+      - ./ready:/usr/src/rai-service-tester/ready
+      - ./response_payload_2:/usr/src/rai-service-tester/response_payload
+    working_dir: /usr/src/rai-service-tester
+    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
+    environment:
+      - SERVICE_NAME=rai_service_tester_2
+      - RUST_LOG=info
+      - PORT=7122
+    ports:
+      - "7122:7122"
+    depends_on:
+      - graphite
+      - grafana
+
+  rai_service_tester_3:
+    image: rai-service-tester:latest
+    volumes:
+      - .:/usr/src/rai-service-tester-volume
+      - ./config.yml:/usr/src/rai-service-tester/config.yml
+      - ./ready:/usr/src/rai-service-tester/ready
+      - ./response_payload_3:/usr/src/rai-service-tester/response_payload
+    working_dir: /usr/src/rai-service-tester
+    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
+    environment:
+      - SERVICE_NAME=rai_service_tester_3
+      - RUST_LOG=info
+      - PORT=7123
+    ports:
+      - "7123:7123"
+    depends_on:
+      - graphite
+      - grafana
+
+  rai_service_tester_4:
+    image: rai-service-tester:latest
+    volumes:
+      - .:/usr/src/rai-service-tester-volume
+      - ./config.yml:/usr/src/rai-service-tester/config.yml
+      - ./ready:/usr/src/rai-service-tester/ready
+      - ./response_payload_4:/usr/src/rai-service-tester/response_payload
+    working_dir: /usr/src/rai-service-tester
+    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
+    environment:
+      - SERVICE_NAME=rai_service_tester_4
+      - RUST_LOG=info
+      - PORT=7124
+    ports:
+      - "7124:7124"
+    depends_on:
+      - graphite
+      - grafana
+
+  rai_service_tester_5:
+    image: rai-service-tester:latest
+    volumes:
+      - .:/usr/src/rai-service-tester-volume
+      - ./config.yml:/usr/src/rai-service-tester/config.yml
+      - ./ready:/usr/src/rai-service-tester/ready
+      - ./response_payload_5:/usr/src/rai-service-tester/response_payload
+    working_dir: /usr/src/rai-service-tester
+    command: ["/usr/src/rai-service-tester/target/release/rai-service-tester", "--servertest"]
+    environment:
+      - SERVICE_NAME=rai_service_tester_5
+      - RUST_LOG=info
+      - PORT=7125
+    ports:
+      - "7125:7125"
+    depends_on:
+      - graphite
+      - grafana
+
+  graphite:
+    image: graphiteapp/graphite-statsd
+    ports:
+      - "8080:80"
+      - "2003-2004:2003-2004"
+      - "2023-2024:2023-2024"
+      - "8125:8125/udp"
+      - "8126:8126"
+
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - "3000:3000"
