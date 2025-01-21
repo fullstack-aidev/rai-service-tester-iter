@@ -7,9 +7,6 @@ WORKDIR /usr/src/app
 # Copy the Cargo.toml and Cargo.lock files
 COPY Cargo.toml Cargo.lock ./
 
-# Create a dummy main.rs file to build dependencies
-RUN mkdir src && echo "fn main() {}" > src/main.rs
-
 # Build the dependencies
 RUN cargo build --release
 
