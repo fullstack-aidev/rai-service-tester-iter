@@ -18,6 +18,7 @@ services:
       - SERVICE_NAME=rai_service_tester_1
       - RUST_LOG=info
       - PORT=7121
+      - STATSD_HOST=graphite
     ports:
       - "7121:7121"
     depends_on:
@@ -44,6 +45,7 @@ services:
       - SERVICE_NAME=rai_service_tester_2
       - RUST_LOG=info
       - PORT=7122
+      - STATSD_HOST=graphite
     ports:
       - "7122:7122"
     depends_on:
@@ -70,6 +72,7 @@ services:
       - SERVICE_NAME=rai_service_tester_3
       - RUST_LOG=info
       - PORT=7123
+      - STATSD_HOST=graphite
     ports:
       - "7123:7123"
     depends_on:
@@ -96,6 +99,7 @@ services:
       - SERVICE_NAME=rai_service_tester_4
       - RUST_LOG=info
       - PORT=7124
+      - STATSD_HOST=graphite
     ports:
       - "7124:7124"
     depends_on:
@@ -122,6 +126,7 @@ services:
       - SERVICE_NAME=rai_service_tester_5
       - RUST_LOG=info
       - PORT=7125
+      - STATSD_HOST=graphite
     ports:
       - "7125:7125"
     depends_on:
@@ -148,6 +153,7 @@ services:
       - SERVICE_NAME=rai_service_tester_iter
       - RUST_LOG=info
       - PORT=3030
+      - STATSD_HOST=graphite
     ports:
       - "3030:3030"
     depends_on:
