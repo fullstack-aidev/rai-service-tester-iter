@@ -108,9 +108,9 @@ services:
     environment:
       - SERVICE_NAME=rai_service_tester_iter
       - RUST_LOG=info
-      - PORT=7126
+      - PORT=3030
     ports:
-      - "7126:7126"
+      - "3030:3030"
     depends_on:
       - rai_service_tester_1
       - rai_service_tester_2
