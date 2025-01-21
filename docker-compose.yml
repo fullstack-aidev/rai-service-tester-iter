@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  rai_tester_network:
+    driver: bridge
+
 services:
   rai_service_tester_1:
     image: rai-service-tester:latest
@@ -19,6 +23,13 @@ services:
     depends_on:
       - graphite
       - grafana
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7121/healthcheck" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rai_tester_network
 
   rai_service_tester_2:
     image: rai-service-tester:latest
@@ -38,6 +49,13 @@ services:
     depends_on:
       - graphite
       - grafana
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7122/healthcheck" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rai_tester_network
 
   rai_service_tester_3:
     image: rai-service-tester:latest
@@ -57,6 +75,13 @@ services:
     depends_on:
       - graphite
       - grafana
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7123/healthcheck" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rai_tester_network
 
   rai_service_tester_4:
     image: rai-service-tester:latest
@@ -76,6 +101,13 @@ services:
     depends_on:
       - graphite
       - grafana
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7124/healthcheck" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rai_tester_network
 
   rai_service_tester_5:
     image: rai-service-tester:latest
@@ -95,6 +127,13 @@ services:
     depends_on:
       - graphite
       - grafana
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:7125/healthcheck" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rai_tester_network
 
   rai_service_tester_iter:
     image: rai-service-tester-iter:latest
@@ -112,11 +151,18 @@ services:
     ports:
       - "3030:3030"
     depends_on:
-      - rai_service_tester_1
-      - rai_service_tester_2
-      - rai_service_tester_3
-      - rai_service_tester_4
-      - rai_service_tester_5
+      rai_service_tester_1:
+        condition: service_healthy
+      rai_service_tester_2:
+        condition: service_healthy
+      rai_service_tester_3:
+        condition: service_healthy
+      rai_service_tester_4:
+        condition: service_healthy
+      rai_service_tester_5:
+        condition: service_healthy
+    networks:
+      - rai_tester_network
 
   graphite:
     image: graphiteapp/graphite-statsd
@@ -126,8 +172,12 @@ services:
       - "2023-2024:2023-2024"
       - "8125:8125/udp"
       - "8126:8126"
+    networks:
+      - rai_tester_network
 
   grafana:
     image: grafana/grafana-oss
     ports:
       - "3000:3000"
+    networks:
+      - rai_tester_network
