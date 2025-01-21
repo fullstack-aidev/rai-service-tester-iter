@@ -97,7 +97,7 @@ services:
       - grafana
 
   rai_service_tester_iter:
-    image: rai-service-tester:latest
+    image: rai-service-tester-iter:latest
     volumes:
       - .:/usr/src/rai-service-tester-volume
       - ./config.yml:/usr/src/rai-service-tester/config.yml
