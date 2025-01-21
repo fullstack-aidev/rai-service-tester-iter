@@ -1,6 +1,6 @@
 load_test_mode:
   enable: true
-  total_request_per_secs: 400
+  total_request_per_secs: 10
   duration_between_request: "auto"
 log_level: "info" # "info" or "debug"
 log_detail: "summary" # "summary" or "detail"

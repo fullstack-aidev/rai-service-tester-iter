@@ -8,6 +8,8 @@ use tokio::time::sleep;
 use futures::future::join_all;
 use log::{info, error};
 use std::sync::Once;
+use warp::Filter;
+use crate::config_loader::Config;
 
 static INIT: Once = Once::new();
 
@@ -17,13 +19,30 @@ async fn main() {
         env_logger::init();
     });
 
-    let config = load_config("config_iter.yml");
-
     let client = ClientBuilder::new()
         .timeout(Duration::from_secs(30))
         .build()
         .unwrap();
 
+    // Define the warp filter for the /start endpoint
+    let start_route = warp::path("start")
+        .and(warp::post())
+        .map(move || {
+            let client = client.clone();
+            tokio::spawn(async move {
+                let config = load_config("config_iter.yml");
+                run_iterations(client, config).await;
+            });
+            warp::reply::with_status("Started iterations", warp::http::StatusCode::OK)
+        });
+
+    // Start the warp server
+    warp::serve(start_route)
+        .run(([0, 0, 0, 0], 3030))
+        .await;
+}
+
+async fn run_iterations(client: Client, config: Config) {
     // Add a delay to ensure the server is ready
     sleep(Duration::from_secs(10)).await;
 

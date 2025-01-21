@@ -3,14 +3,14 @@ use std::fs::File;
 use std::io::Read;
 use serde_yaml;
 
-#[derive(Deserialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Config {
     pub loop_count: usize,
     pub delay_between_iteration_in_ms: u64,
     pub rai_service_tester: RaiServiceTester,
 }
 
-#[derive(Deserialize)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct RaiServiceTester {
     pub replica_address: Vec<String>,
 }

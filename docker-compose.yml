@@ -96,6 +96,28 @@ services:
       - graphite
       - grafana
 
+  rai_service_tester_iter:
+    image: rai-service-tester:latest
+    volumes:
+      - .:/usr/src/rai-service-tester-volume
+      - ./config.yml:/usr/src/rai-service-tester/config.yml
+      - ./ready:/usr/src/rai-service-tester/ready
+      - ./response_payload:/usr/src/rai-service-tester/response_payload
+    working_dir: /usr/src/rai-service-tester
+    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester-iter --servertest'
+    environment:
+      - SERVICE_NAME=rai_service_tester_iter
+      - RUST_LOG=info
+      - PORT=7126
+    ports:
+      - "7126:7126"
+    depends_on:
+      - rai_service_tester_1
+      - rai_service_tester_2
+      - rai_service_tester_3
+      - rai_service_tester_4
+      - rai_service_tester_5
+
   graphite:
     image: graphiteapp/graphite-statsd
     ports:
