@@ -1,8 +1,8 @@
 # Use the official Rust image as the base image
-FROM rust:latest  AS builder
+FROM rust:latest AS builder
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /usr/app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 # Update rust and cargo to the latest stable version
 RUN rustup update stable
 
-# Copy only the necessary files and directories for the build into the container at /usr/src/rai-service-tester
+# Copy only the necessary files and directories for the build into the container at /usr/app
 COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 COPY config_iter.yml ./
@@ -29,16 +29,15 @@ RUN apt-get update && apt-get install -y \
     libssl3 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /app /app/response_payload
+RUN mkdir /usr/app /usr/app/response_payload
 
-WORKDIR /app
+WORKDIR /usr/app
 
-COPY --from=builder /app/target/release/rai-service-tester-iter .
-COPY --from=builder /app/config_iter.yml .
-
+COPY --from=builder /usr/app/target/release/rai-service-tester-iter .
+COPY --from=builder /usr/app/config_iter.yml .
 
 # Expose the port that the application will run on
 EXPOSE 3030
 
 # Run the application in servertest mode
-CMD ["./target/release/rai-service-tester-iter"]
+CMD ["./rai-service-tester-iter"]

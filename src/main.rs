@@ -6,7 +6,7 @@ use reqwest::ClientBuilder;
 use config_loader::load_config;
 use tokio::time::sleep;
 use futures::future::join_all;
-use log::{info, error};
+use log::{info};
 use std::sync::Once;
 use warp::Filter;
 use crate::config_loader::Config;
@@ -20,7 +20,7 @@ async fn main() {
     });
 
     let client = ClientBuilder::new()
-        .timeout(Duration::from_secs(30))
+        .timeout(Duration::from_secs(3))
         .build()
         .unwrap();
 
@@ -36,7 +36,8 @@ async fn main() {
             warp::reply::with_status("Started iterations", warp::http::StatusCode::OK)
         });
 
-    // Start the warp server
+    /// Start the warp server
+    info!("Starting server on port 3030");
     warp::serve(start_route)
         .run(([0, 0, 0, 0], 3030))
         .await;

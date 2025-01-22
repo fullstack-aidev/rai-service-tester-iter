@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 networks:
   rai_tester_network:
@@ -8,12 +8,11 @@ services:
   rai_service_tester_1:
     image: rai-service-tester:minimized
     volumes:
-      - .:/usr/src/rai-service-tester-volume
-      - ./config.yml:/usr/src/rai-service-tester/config.yml
-      - ./ready:/usr/src/rai-service-tester/ready
-      - ./response_payload_1:/usr/src/rai-service-tester/response_payload
-    working_dir: /usr/src/rai-service-tester
-    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
+      - ./config.yml:/usr/app/config.yml
+      - ./ready:/usr/app/ready
+      - ./response_payload_1:/usr/app/response_payload
+    working_dir: /usr/app
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
     environment:
       - SERVICE_NAME=rai_service_tester_1
       - RUST_LOG=info
@@ -35,12 +34,11 @@ services:
   rai_service_tester_2:
     image: rai-service-tester:minimized
     volumes:
-      - .:/usr/src/rai-service-tester-volume
-      - ./config.yml:/usr/src/rai-service-tester/config.yml
-      - ./ready:/usr/src/rai-service-tester/ready
-      - ./response_payload_2:/usr/src/rai-service-tester/response_payload
-    working_dir: /usr/src/rai-service-tester
-    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
+      - ./config.yml:/usr/app/config.yml
+      - ./ready:/usr/app/ready
+      - ./response_payload_1:/usr/app/response_payload
+    working_dir: /usr/app
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
     environment:
       - SERVICE_NAME=rai_service_tester_2
       - RUST_LOG=info
@@ -62,12 +60,11 @@ services:
   rai_service_tester_3:
     image: rai-service-tester:minimized
     volumes:
-      - .:/usr/src/rai-service-tester-volume
-      - ./config.yml:/usr/src/rai-service-tester/config.yml
-      - ./ready:/usr/src/rai-service-tester/ready
-      - ./response_payload_3:/usr/src/rai-service-tester/response_payload
-    working_dir: /usr/src/rai-service-tester
-    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
+      - ./config.yml:/usr/app/config.yml
+      - ./ready:/usr/app/ready
+      - ./response_payload_1:/usr/app/response_payload
+    working_dir: /usr/app
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
     environment:
       - SERVICE_NAME=rai_service_tester_3
       - RUST_LOG=info
@@ -89,12 +86,11 @@ services:
   rai_service_tester_4:
     image: rai-service-tester:minimized
     volumes:
-      - .:/usr/src/rai-service-tester-volume
-      - ./config.yml:/usr/src/rai-service-tester/config.yml
-      - ./ready:/usr/src/rai-service-tester/ready
-      - ./response_payload_4:/usr/src/rai-service-tester/response_payload
-    working_dir: /usr/src/rai-service-tester
-    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
+      - ./config.yml:/usr/app/config.yml
+      - ./ready:/usr/app/ready
+      - ./response_payload_1:/usr/app/response_payload
+    working_dir: /usr/app
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
     environment:
       - SERVICE_NAME=rai_service_tester_4
       - RUST_LOG=info
@@ -116,12 +112,11 @@ services:
   rai_service_tester_5:
     image: rai-service-tester:minimized
     volumes:
-      - .:/usr/src/rai-service-tester-volume
-      - ./config.yml:/usr/src/rai-service-tester/config.yml
-      - ./ready:/usr/src/rai-service-tester/ready
-      - ./response_payload_5:/usr/src/rai-service-tester/response_payload
-    working_dir: /usr/src/rai-service-tester
-    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester --servertest'
+      - ./config.yml:/usr/app/config.yml
+      - ./ready:/usr/app/ready
+      - ./response_payload_1:/usr/app/response_payload
+    working_dir: /usr/app
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
     environment:
       - SERVICE_NAME=rai_service_tester_5
       - RUST_LOG=info
@@ -143,12 +138,11 @@ services:
   rai_service_tester_iter:
     image: rai-service-tester-iter:minimized
     volumes:
-      - .:/usr/src/rai-service-tester-volume
-      - ./config.yml:/usr/src/rai-service-tester/config.yml
-      - ./ready:/usr/src/rai-service-tester/ready
-      - ./response_payload:/usr/src/rai-service-tester/response_payload
-    working_dir: /usr/src/rai-service-tester
-    command: sh -c 'rm -rf /usr/src/rai-service-tester/response_payload/loadtest-response/* && /usr/src/rai-service-tester/target/release/rai-service-tester-iter --servertest'
+      - ./config_iter.yml:/usr/app/config_iter.yml
+      - ./ready:/usr/app/ready
+      - ./response_payload:/usr/app/response_payload
+    working_dir: /usr/app
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester-iter'  # Perbaikan: Path executable
     environment:
       - SERVICE_NAME=rai_service_tester_iter
       - RUST_LOG=info
@@ -157,16 +151,11 @@ services:
     ports:
       - "3030:3030"
     depends_on:
-      rai_service_tester_1:
-        condition: service_healthy
-      rai_service_tester_2:
-        condition: service_healthy
-      rai_service_tester_3:
-        condition: service_healthy
-      rai_service_tester_4:
-        condition: service_healthy
-      rai_service_tester_5:
-        condition: service_healthy
+      - rai_service_tester_1
+      - rai_service_tester_2
+      - rai_service_tester_3
+      - rai_service_tester_4
+      - rai_service_tester_5
     networks:
       - rai_tester_network
 
