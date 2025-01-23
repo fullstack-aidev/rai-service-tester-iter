@@ -176,8 +176,8 @@ services:
     image: grafana/grafana-oss
     user: "472"
     volumes:
-      - ./grafana_data:/var/lib/grafana
-      - ./grafana_plugins:/var/lib/grafana/plugins # Mount direktori plugins
+      - ./grafana_data:/var/lib/grafana:z
+      - ./grafana_plugins:/var/lib/grafana/plugins:z
     ports:
       - "3000:3000"
     networks:
