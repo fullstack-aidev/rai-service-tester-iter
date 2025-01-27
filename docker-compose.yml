@@ -11,8 +11,9 @@ services:
       - ./config.yml:/usr/app/config.yml
       - ./ready:/usr/app/ready
       - ./response_payload_1:/usr/app/response_payload
+      - ./logs_1:/usr/app/logs
     working_dir: /usr/app
-    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_1
       - RUST_LOG=info
@@ -37,8 +38,9 @@ services:
       - ./config.yml:/usr/app/config.yml
       - ./ready:/usr/app/ready
       - ./response_payload_1:/usr/app/response_payload
+      - ./logs_2:/usr/app/logs
     working_dir: /usr/app
-    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_2
       - RUST_LOG=info
@@ -63,8 +65,9 @@ services:
       - ./config.yml:/usr/app/config.yml
       - ./ready:/usr/app/ready
       - ./response_payload_1:/usr/app/response_payload
+      - ./logs_3:/usr/app/logs
     working_dir: /usr/app
-    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_3
       - RUST_LOG=info
@@ -89,8 +92,9 @@ services:
       - ./config.yml:/usr/app/config.yml
       - ./ready:/usr/app/ready
       - ./response_payload_1:/usr/app/response_payload
+      - ./logs_4:/usr/app/logs
     working_dir: /usr/app
-    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_4
       - RUST_LOG=info
@@ -115,8 +119,9 @@ services:
       - ./config.yml:/usr/app/config.yml
       - ./ready:/usr/app/ready
       - ./response_payload_1:/usr/app/response_payload
+      - ./logs_5:/usr/app/logs
     working_dir: /usr/app
-    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest' # Perbaikan: Path executable
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_5
       - RUST_LOG=info
@@ -142,7 +147,7 @@ services:
       - ./ready:/usr/app/ready
       - ./response_payload:/usr/app/response_payload
     working_dir: /usr/app
-    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester-iter'  # Perbaikan: Path executable
+    command: sh -c 'rm -rf /usr/app/response_payload/loadtest-response/* && /usr/app/rai-service-tester-iter --servertest'
     environment:
       - SERVICE_NAME=rai_service_tester_iter
       - RUST_LOG=info

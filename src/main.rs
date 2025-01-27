@@ -1,5 +1,6 @@
 mod config_loader;
 
+use std::env;
 use std::time::Duration;
 use reqwest::Client;
 use reqwest::ClientBuilder;
@@ -19,35 +20,41 @@ async fn main() {
         env_logger::init();
     });
 
+    let args: Vec<String> = env::args().collect();
     let client = ClientBuilder::new()
-        .timeout(Duration::from_secs(3))
+        .timeout(Duration::from_secs(10))
         .build()
         .unwrap();
 
-    // Define the warp filter for the /start endpoint
-    let start_route = warp::path("start")
-        .and(warp::post())
-        .map(move || {
-            let client = client.clone();
-            tokio::spawn(async move {
-                let config = load_config("config_iter.yml");
-                run_iterations(client, config).await;
+    if args.contains(&"--servertest".to_string()) {
+        // Define the warp filter for the /start endpoint
+        let start_route = warp::path("start")
+            .and(warp::post())
+            .and_then(move || {
+                let client = client.clone();
+                async move {
+                    let config = load_config("config_iter.yml");
+                    run_iterations(client, config).await;
+                    Ok::<_, warp::Rejection>(warp::reply::with_status("Completed iterations", warp::http::StatusCode::OK))
+                }
             });
-            warp::reply::with_status("Started iterations", warp::http::StatusCode::OK)
-        });
 
-    /// Start the warp server
-    info!("Starting server on port 3030");
-    warp::serve(start_route)
-        .run(([0, 0, 0, 0], 3030))
-        .await;
+        // Start the warp server
+        info!("Starting server on port 3030");
+        warp::serve(start_route)
+            .run(([0, 0, 0, 0], 3030))
+            .await;
+    } else {
+        let config = load_config("config_iter.yml");
+        run_iterations(client, config).await;
+    }
 }
 
 async fn run_iterations(client: Client, config: Config) {
     info!("Starting run_iterations function");
 
     // Add a delay to ensure the server is ready
-    sleep(Duration::from_secs(10)).await;
+    sleep(Duration::from_secs(1)).await;
     info!("Initial delay completed");
 
     for i in 0..config.loop_count {
