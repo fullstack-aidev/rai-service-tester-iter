@@ -4,8 +4,11 @@ load_test_mode:
   duration_between_request: "auto"
 log_level: "info" # "info" or "debug"
 log_detail: "summary" # "summary" or "detail"
+log_options: ["stdout"]  # ["stdout", "file", "clickhouse", "nats"]
+statistic_metrics:
+  enable : true
 api_gateway:
-  host: 192.168.1.24:7878
+  host:  192.168.1.17:7878 #127.0.0.1:7878 #192.168.1.17:7878
   key: 1234567890
   secret: 1234567890
   stage: "dev" #  "dev", "sit", "demo-prod" or "prod"
