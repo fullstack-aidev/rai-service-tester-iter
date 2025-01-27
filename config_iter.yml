@@ -1,5 +1,5 @@
 # config_iter.yml
-loop_count: 10
+loop_count: 100
 delay_between_iteration_in_ms: 1000
 rai_service_tester:
   replica_address:
