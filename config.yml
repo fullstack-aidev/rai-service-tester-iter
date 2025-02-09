@@ -1,7 +1,7 @@
 load_test_mode:
   enable: true
-  total_request_per_secs: 500
-  duration_between_request: "auto"
+  total_request_per_secs: 1000
+  duration_between_request: "random:1-10000"  # option: 1. "auto"  2. "n" in nanoseconds  3. "random:n1-n2" in nanoseconds
 log_level: "info" # "info" or "debug"
 log_detail: "summary" # "summary" or "detail"
 log_options: ["stdout"]  # ["stdout", "file", "clickhouse", "nats"]
