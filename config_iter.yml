@@ -1,6 +1,6 @@
 # config_iter.yml
-loop_count: 100
-delay_between_iteration_in_ms: 1000
+loop_count: 50
+delay_between_iteration_in_ms: 500
 rai_service_tester:
   replica_address:
     - "http://localhost:7121"
