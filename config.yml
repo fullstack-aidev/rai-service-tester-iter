@@ -1,6 +1,6 @@
 load_test_mode:
   enable: true
-  total_request_per_secs: 500
+  total_request_per_secs: 400
   duration_between_request: "random:1-10000"  # option: 1. "auto"  2. "n" in nanoseconds  3. "random:n1-n2" in nanoseconds
 log_level: "info" # "info" or "debug"
 log_detail: "summary" # "summary" or "detail"
@@ -8,7 +8,7 @@ log_options: ["stdout"]  # ["stdout", "file", "clickhouse", "nats"]
 statistic_metrics:
   enable : true
 api_gateway:
-  host:  192.168.1.17:7878 #127.0.0.1:7878 #192.168.1.17:7878
+  host:  192.168.1.17:7878 # 127.0.0.1:7878 
   key: 1234567890
   secret: 1234567890
   stage: "dev" #  "dev", "sit", "demo-prod" or "prod"
